@@ -1,5 +1,8 @@
 name: "Terraform apply"
-on: workflow_dispatch
+on: 
+  push:
+    branches:
+    - main
 jobs:
   deployment:
     name: Infra deployment
@@ -15,5 +18,17 @@ jobs:
       uses: hashicorp/setup-terraform@v2
     - name: Init
       run: terraform init
+
+    - name: Terraform Plan
+      id: Plan
+      if: github.event == "push"
+      run:  terraform plan
+      continue-on-error: true
+
+    - name: Terraform plan status
+      if: steps.plan.outcome == 'failure'
+      run: exit 1
+
     - name: Deploy
+      if: github.ref == 'refs/head/master' && github.event_name == 'push'
       run: terraform apply -auto-approve
