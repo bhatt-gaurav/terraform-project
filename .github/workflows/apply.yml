@@ -2,7 +2,7 @@ name: "Terraform apply"
 on: 
   push:
     branches:
-    - main
+    - master
 jobs:
   deployment:
     name: Infra deployment
