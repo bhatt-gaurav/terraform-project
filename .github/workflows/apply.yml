@@ -21,7 +21,7 @@ jobs:
 
     - name: Terraform Plan
       id: Plan
-      if: github.event == 'push'
+      if: github.event_name == 'push'
       run:  terraform plan
       continue-on-error: true
 
