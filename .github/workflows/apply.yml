@@ -30,7 +30,7 @@ jobs:
     - name: Deploy
       if: github.ref == 'refs/head/master' && github.event_name == 'push'
       run: terraform apply -var-file=dev.tfvars -auto-approve
-stage:
+  stage:
     name: Stage-deployment
     runs-on: Ubuntu-latest
     environment: stage
