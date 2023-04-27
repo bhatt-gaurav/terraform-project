@@ -7,11 +7,9 @@ variable "aws_region" {
 variable "environment" {
   description = "Env name used as a prefix"
   type        = string
-  default     = "dev"
 }
 
 variable "business_division" {
   description = "Business division"
   type        = string
-  default     = "HR"
 }

@@ -6,12 +6,8 @@ terraform {
       version = "4.63.0"
     }
   }
-  backend "s3" {
-    bucket = "gaurav-terraformstate"
-    key = "gaurav-terraformstate.tfstate"
-    region = "us-west-2"
-    
-  }
+  backend "s3" {}
+  
 }
 
 provider "aws" {
