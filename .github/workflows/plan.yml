@@ -5,7 +5,7 @@ on:
     - feature1
 jobs:
   dev:
-    name: "terraform"
+    name: "dev"
     runs-on: Ubuntu-latest
     environment: dev
     env:
@@ -22,7 +22,7 @@ jobs:
     - name: plan
       run: terraform plan -var-file=dev.tfvars
   stage:
-    name: "terraform"
+    name: "stage"
     runs-on: Ubuntu-latest
     environment: stage
     needs: dev
