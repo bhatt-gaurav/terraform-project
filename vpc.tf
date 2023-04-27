@@ -2,7 +2,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "4.0.1"
 
-  name = "dev-vpc"
+  name = "${var.environment}-vpc"
   cidr = var.vpc_cidr_block
 
   azs             = var.vpc_az
@@ -30,10 +30,10 @@ module "vpc" {
 
   tags = {
     Terraform_managed = "true"
-    Environment       = "dev"
+    Environment       = "${var.environment}"
   }
   vpc_tags = {
-    Name = "vpc-dev"
+    Name = "vpc-${var.environment}"
   }
 
 
