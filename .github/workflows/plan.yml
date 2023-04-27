@@ -4,7 +4,7 @@ on:
     branches:
     - feature1
 jobs:
-  terraform:
+  dev:
     name: "terraform"
     runs-on: Ubuntu-latest
     env:
@@ -17,6 +17,23 @@ jobs:
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v2
     - name: init
-      run: terraform init
+      run: terraform init -backend-config=dev.conf
     - name: plan
-      run: terraform plan
+      run: terraform plan -var-file=dev.tfvars
+  stage:
+    name: "terraform"
+    runs-on: Ubuntu-latest
+    needs: dev
+    env:
+      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+      AWS_REGION: 'us-west-2'
+    steps:
+    - name: checkout
+      uses: actions/checkout@v3
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v2
+    - name: init
+      run: terraform init -backend-config=stage.conf
+    - name: plan
+      run: terraform plan -var-file=stage.tfvars
