@@ -28,7 +28,7 @@ jobs:
       if: steps.plan.outcome == 'failure'
       run: exit 1
     - name: Deploy
-      if: github.ref == 'refs/head/master' && github.event_name == 'push'
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
       run: terraform apply -var-file=dev.tfvars -auto-approve
   stage:
     name: Stage-deployment
