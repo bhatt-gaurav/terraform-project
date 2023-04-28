@@ -3,8 +3,8 @@ on: workflow_dispatch
 jobs:
   dev:
     name: Dev-destroy
-    runs-on: Ubuntu-latest
-    environment: stage
+    runs-on: ubuntu-latest
+    environment: dev
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -20,7 +20,7 @@ jobs:
       run: terraform destroy -var-file=dev.tfvars -auto-approve
   stage:
     name: Stage-destroy
-    runs-on: Ubuntu-latest
+    runs-on: ubuntu-latest
     environment: stage
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID}}
